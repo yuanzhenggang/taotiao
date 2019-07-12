@@ -30,6 +30,7 @@
 </template>
 
 <script>
+
 export default {
     data() {
         //用来校验电话号码的
@@ -79,6 +80,13 @@ export default {
               const data = res.data
             //   后台的返回json内容  已经转换成了对象
             console.log(data)
+            //登录成功后：做什么事情？
+            //1.跳转到首页
+            //2.保存到登录状态
+            //2.1  保存登录后返回的用户信息 包含token
+            //2.2  使用sessionStorage 来存储 关闭浏览器会话失效
+            window.sessionStorage.setItem('hm-taotiao',JSON.stringify(res.data.data))
+            //setItem设置是key value的形式，都必须是字符串的形式
           })
           .catch(()=> {
               this.$message.error('用户名或密码错误')

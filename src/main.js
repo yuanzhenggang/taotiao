@@ -9,9 +9,20 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
 //将新建的路由文件在入口文件中导入@代表根目录
-import router from '@/routers'
+// import router from '@/routers'
 
-Vue.config.productionTip = false
+// 导入axios
+// import axios from 'axios'
+// //基准路径
+// axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0'
+// // //请求头
+// axios.defaults.headers = {
+//   // token认证需要字段  值：注意需要加上前缀 ’Bearer ‘
+//   Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem('hm-toutiao')).token
+// }
+// Vue.prototype.$axios = axios
+
+// Vue.config.productionTip = false
 
 new Vue({
   //配置路由
