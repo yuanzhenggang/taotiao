@@ -3,12 +3,13 @@ import axios from 'axios'
 
 const instance = axios.create({
     baseURL:'http://ttapi.research.itcast.cn/mp/v1_0',
-    headers: {
-        Authorization:'Bearer' + JSON.parse(Window.sessionStorage.getItem('hm-toutiao')).token
-    }
+    // headers: {
+    //     Authorization:'Bearer' + JSON.parse(Window.sessionStorage.getItem('hm-toutiao')).token
+    // }
 })
 //添加请求拦截器
 instance.interceptors.request.use(config=> {
+    //创建promise对象的方式 new Promise() 结果可能成功可能失败
     const user = window.sessionStorage.getItem('hm-toutiao')
     if(user) {
         //config请求配置对象

@@ -33,10 +33,11 @@ const router = new  VueRouter({
     ]
 })
 //注册一个全局的前置导航守卫
-// router.beforeEach((to,from,next) => {
-//     const user = window.sessionStorage.getItem('hm-toutiao')
-//     if(to.path!=='/login'&& !user) return next('/login')
-//     next()
-// })
+router.beforeEach((to,from,next) => {
+    //如果不去主动的触发 resolve(next下一步) 会一直等待（需要next放行）
+    const user = window.sessionStorage.getItem('hm-toutiao')
+    if(to.path!=='/login'&& !user) return next('/login')
+    next() 
+})
 //导出
 export default router

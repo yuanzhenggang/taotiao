@@ -70,7 +70,7 @@ export default {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           // 如果校验成功 进行登录
-          this.$axios
+          this.$http
           .post(
             'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
             this.loginForm
@@ -85,8 +85,9 @@ export default {
             //2.保存到登录状态
             //2.1  保存登录后返回的用户信息 包含token
             //2.2  使用sessionStorage 来存储 关闭浏览器会话失效
-            window.sessionStorage.setItem('hm-taotiao',JSON.stringify(res.data.data))
+            window.sessionStorage.setItem('hm-toutiao',JSON.stringify(res.data.data))
             //setItem设置是key value的形式，都必须是字符串的形式
+            this.$router.push('/')
           })
           .catch(()=> {
               this.$message.error('用户名或密码错误')
