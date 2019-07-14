@@ -66,7 +66,7 @@ export default {
     },
     methods: {
     login () {
-      // 整体表单的校验
+    //   整体表单的校验
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           // 如果校验成功 进行登录
@@ -94,9 +94,27 @@ export default {
           })
         }
       })
-    }
+
+
+    //将以上代码修改成await和async的方式
+    //做校验的代码
+    // this.$refs.loginForm.validate(async valid=> {
+    //     if(valid) {
+    //         //当接口调用失败的时候，以下代码出现异常
+    //         // try{ 业务逻辑 }catch(err) {错误信息}
+    //         try {
+    //             const res = await this.$http.post('authorizations',this.loginFrom)
+    //             window.sessionStorage.setItem('hm-toutiao',JSON.stringify(res.data.data))
+    //             this.$router.push('/')
+    //         }catch (err) {
+    //             this.$message.error('用户名或密码错误')
+    //         }
+    //     }
+    // })
+     }
   }
 }
+
 </script>
 
 <style scoped lang='less'>

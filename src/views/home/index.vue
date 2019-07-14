@@ -4,8 +4,10 @@
     <el-aside class="my-aside" :width="collapse?'64px':'200px'">
       <div class="logo" :class="{close:collapse}"></div>
       <!-- 侧边菜单 -->
+       <!-- $route 是获取路由数据的 $route.path是获取不带#的当前路径 -->
+       <!-- $router 是调用路由方法的 -->
       <el-menu
-        default-active="1"
+        :default-active="$route.path"
         background-color="#002033"
         text-color="#fff"
         active-text-color="#ffd04b"
@@ -54,15 +56,18 @@
               style="vertical-align:middle"
               width="30"
               height="30"
-              src="../../assets/images/avatar.jpg"
+              :src="avatar" 
               alt
             />
-            <b style="vertical-align:middle;padding-left:5px">黑马小哥</b>
+            <b style="vertical-align:middle;padding-left:5px">{{name}}</b>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+          <!-- //click事件是给谁绑定 el-dropdown-item -->
+          <!-- 因为它不是原生的dom,不一定支持原生的事件绑定，所以要用到事件修饰符
+           @click.prevent 默认行为  @click.native 触发原生事件-->
+            <el-dropdown-item icon="el-icon-setting" @click.native="setting()">个人设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-unlock" @click.native="logout()">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -79,12 +84,29 @@
 export default {
   data () {
       return {
-          collapse:false
+          collapse:false,
+          name:'',
+          avatar:''
       }
+  },
+  created () {
+    const user = JSON.parse(window.sessionStorage.getItem('hm-toutiao'))
+    this.name = user.name
+    this.avatar = user.photo
   },
   methods: {
       toggleMenu () {
           this.collapse = !this.collapse
+      },
+      setting () {
+        this.$router.push('/setting')
+      },
+      //退出登录就是清空数据
+      logout () {
+        //清空数据
+        window.sessionStorage.setItem('hm-toutiao',null)
+        // 或window.sessionStorage.removeItem('hm-toutiao')
+        this.$router.push('/login')
       }
   }
 }

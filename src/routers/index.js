@@ -8,6 +8,8 @@ import login from '@/views/login'
 import Home from '@/views/home'
 import Welcome from '@/views/welcome'
 
+import Article from '@/views/article'
+
 //导入404页面
 import NotFound from '@/views/404'
 
@@ -25,10 +27,13 @@ const router = new  VueRouter({
             name:'home',
             component:Home,
             children: [
-            {path:'/',name:'welcome',component:Welcome}
+            {path:'/',name:'welcome',component:Welcome},
+            {path:'/article',name:'article',component:Article},
         ]
         },
-        {path:'*',name:'404',component:NotFound}
+        
+        {path:'*',name:'404',component:NotFound},
+        
         //注意别加引号给组件
     ]
 })
